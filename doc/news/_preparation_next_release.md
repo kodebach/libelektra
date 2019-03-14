@@ -158,6 +158,13 @@ you up to date with the multi-language support provided by Elektra.
 - <<TODO>>
 - <<TODO>>
 
+### Code generation
+
+`kdb gen` is now no longer an external tool implemented via python, but rather a first class command of the `kdb` tool. For now it only
+supports code generation for use with the highlevel API.
+
+. _(Klemens Böswirth)_
+
 ## Scripts
 
 - <<TODO>>
