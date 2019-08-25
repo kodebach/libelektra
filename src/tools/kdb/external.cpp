@@ -30,7 +30,7 @@
 
 const char * buildinExecPath = BUILTIN_EXEC_FOLDER;
 
-static std::string cwd ()
+std::string cwd ()
 {
 	std::vector<char> current_dir;
 	current_dir.resize (KDB_MAX_PATH_LENGTH);

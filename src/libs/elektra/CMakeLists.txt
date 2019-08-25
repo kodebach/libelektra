@@ -134,8 +134,7 @@ if (BUILD_SHARED)
 	# search only in the prefix the user decided to install elektra
 	# (e.g. /usr/local/)
 	# ~~~
-	set (ELEKTRA_RPATH "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/${TARGET_PLUGIN_FOLDER}")
-	set_target_properties (${elektra-all_LIBRARIES} PROPERTIES INSTALL_RPATH "${ELEKTRA_RPATH}")
+	set_target_properties (${elektra-all_LIBRARIES} PROPERTIES INSTALL_RPATH "\$ORIGIN/${TARGET_PLUGIN_FOLDER}:\$ORIGIN")
 
 	install (TARGETS elektra-core
 			 elektra-kdb
@@ -193,6 +192,7 @@ if (BUILD_FULL)
 		set_target_properties (elektra-full PROPERTIES LINK_FLAGS "-Wl,--version-script='${__symbols_file}'")
 	endif ()
 
+	set_target_properties (elektra-full PROPERTIES INSTALL_RPATH "\$ORIGIN/${TARGET_PLUGIN_FOLDER}:\$ORIGIN")
 	install (TARGETS elektra-full DESTINATION lib${LIB_SUFFIX} EXPORT ElektraTargetsLibelektra)
 
 	list (APPEND targets_built elektra-full)

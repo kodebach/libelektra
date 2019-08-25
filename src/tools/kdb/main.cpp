@@ -181,6 +181,9 @@ int main (int argc, char ** argv)
 		// differently for external command
 		if (dynamic_cast<ExternalCommand *> (cmd.get ()))
 		{
+			std::string kdbPath = argv[0][0] == '/' ? argv[0] : cwd () + "/" + argv[0];
+			setenv ("KDB", kdbPath.c_str (), 1);
+
 			tryExternalCommand (&origArguments[0]);
 			// does not return, but may throw
 		}

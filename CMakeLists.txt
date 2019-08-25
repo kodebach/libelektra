@@ -22,10 +22,19 @@ endif (CMAKE_VERSION VERSION_LESS 3.9)
 
 # fix macOS RPATH issues
 set (CMAKE_MACOSX_RPATH 1)
-set (CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
+# default to looking in same folder
+set (CMAKE_INSTALL_RPATH "\$ORIGIN")
 
 # additional modules for loading libraries
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+file (RELATIVE_PATH
+      TTE_LIB_REL_PATH
+      "/${TARGET_TOOL_EXEC_FOLDER}"
+      "/lib${LIB_SUFFIX}")
+set (TARGET_TOOL_EXEC_RPATH "\$ORIGIN/${TTE_LIB_REL_PATH}${TARGET_PLUGIN_FOLDER}:\$ORIGIN/${TTE_LIB_REL_PATH}:\$ORIGIN")
+unset (TTE_LIB_REL_PATH)
 
 # needed by ifs below
 include (cmake/ElektraCache.cmake)

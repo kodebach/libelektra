@@ -50,6 +50,7 @@ if (BUILD_SHARED)
 		set_target_properties (elektratools PROPERTIES LINK_FLAGS "-Wl,--version-script='${__symbols_file}'")
 	endif ()
 
+	set_target_properties (elektratools PROPERTIES INSTALL_RPATH "\$ORIGIN/${TARGET_PLUGIN_FOLDER}:\$ORIGIN")
 	install (TARGETS elektratools DESTINATION lib${LIB_SUFFIX})
 endif (BUILD_SHARED)
 
@@ -75,6 +76,7 @@ if (BUILD_FULL)
 		set_target_properties (elektratools-full PROPERTIES LINK_FLAGS "-Wl,--version-script='${__symbols_file}'")
 	endif ()
 
+	set_target_properties (elektratools-full PROPERTIES INSTALL_RPATH "\$ORIGIN/${TARGET_PLUGIN_FOLDER}:\$ORIGIN")
 	install (TARGETS elektratools-full DESTINATION lib${LIB_SUFFIX})
 endif (BUILD_FULL)
 

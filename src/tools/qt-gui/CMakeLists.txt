@@ -96,6 +96,7 @@ else ()
 			       ${Qt5DBus_LIBRARIES})
 	tool_link_elektratools (qt-gui elektra-ease)
 
+	set_target_properties (qt-gui PROPERTIES INSTALL_RPATH "${TARGET_TOOL_EXEC_RPATH}")
 	install (TARGETS qt-gui DESTINATION ${TARGET_TOOL_EXEC_FOLDER})
 	configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/elektra-qt-editor.in" "${CMAKE_CURRENT_BINARY_DIR}/elektra-qt-editor")
 	install (PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/elektra-qt-editor" DESTINATION bin)

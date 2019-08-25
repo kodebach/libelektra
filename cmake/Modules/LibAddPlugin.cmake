@@ -171,6 +171,7 @@ function (add_plugintest testname)
 		# ~~~
 
 		if (INSTALL_TESTING)
+			set_target_properties (${testexename} PROPERTIES INSTALL_RPATH "${TARGET_TOOL_EXEC_RPATH}")
 			install (TARGETS ${testexename} DESTINATION "${TARGET_TOOL_EXEC_FOLDER}")
 			if (ARG_INSTALL_TEST_DATA)
 				install (DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${testname}" DESTINATION "${TARGET_TEST_DATA_FOLDER}")
@@ -600,6 +601,8 @@ function (add_plugin PLUGIN_SHORT_NAME)
 			target_link_libraries (${PLUGIN_NAME} elektra-plugin)
 		endif ()
 		target_link_libraries (${PLUGIN_NAME} ${ARG_LINK_LIBRARIES})
+
+		set_target_properties (${PLUGIN_NAME} PROPERTIES INSTALL_RPATH "\$ORIGIN:\$ORIGIN/..")
 		install (TARGETS ${PLUGIN_NAME} DESTINATION lib${LIB_SUFFIX}/${TARGET_PLUGIN_FOLDER})
 		set_property (TARGET ${PLUGIN_NAME}
 			      APPEND

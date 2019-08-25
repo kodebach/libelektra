@@ -48,6 +48,7 @@ macro (add_gtest source)
 		include_directories (${CMAKE_SOURCE_DIR}/tests/gtest-framework)
 
 		if (INSTALL_TESTING)
+			set_target_properties (${source} PROPERTIES INSTALL_RPATH "${TARGET_TOOL_EXEC_RPATH}")
 			install (TARGETS ${source} DESTINATION ${TARGET_TOOL_EXEC_FOLDER})
 		endif (INSTALL_TESTING)
 

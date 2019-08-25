@@ -18,5 +18,6 @@ else ()
 	target_link_libraries (race ${CMAKE_THREAD_LIBS_INIT})
 	target_link_libraries (race ${LIBRT_LIBRARIES})
 
+	set_target_properties (race PROPERTIES INSTALL_RPATH "${TARGET_TOOL_EXEC_RPATH}")
 	install (TARGETS race DESTINATION ${TARGET_TOOL_EXEC_FOLDER})
 endif ()

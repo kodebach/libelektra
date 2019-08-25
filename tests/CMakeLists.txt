@@ -51,6 +51,7 @@ macro (do_test source)
 	add_dependencies (${source} kdberrors_generated elektra_error_codes_generated)
 
 	if (INSTALL_TESTING)
+		set_target_properties (${source} PROPERTIES INSTALL_RPATH "${TARGET_TOOL_EXEC_RPATH}")
 		install (TARGETS ${source} DESTINATION ${TARGET_TOOL_EXEC_FOLDER})
 	endif (INSTALL_TESTING)
 

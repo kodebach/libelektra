@@ -36,6 +36,9 @@ if (BUILD_SHARED)
 			       elektra-kdb
 			       elektratools)
 
+	set_target_properties (kdb
+			       PROPERTIES INSTALL_RPATH
+					  "\$ORIGIN/../lib${LIB_SUFFIX}/${TARGET_PLUGIN_FOLDER}:\$ORIGIN/../lib${LIB_SUFFIX}:\$ORIGIN")
 	install (TARGETS kdb DESTINATION bin)
 endif (BUILD_SHARED)
 
@@ -46,6 +49,9 @@ if (BUILD_FULL)
 			  elektra_error_codes_generated
 			  kdb_gen_templates_generated)
 
+	set_target_properties (kdb-full
+			       PROPERTIES INSTALL_RPATH
+					  "\$ORIGIN/../lib${LIB_SUFFIX}/${TARGET_PLUGIN_FOLDER}:\$ORIGIN/../lib${LIB_SUFFIX}:\$ORIGIN")
 	target_link_libraries (kdb-full elektra-full elektratools-full)
 
 	install (TARGETS kdb-full DESTINATION bin)
