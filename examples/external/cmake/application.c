@@ -10,6 +10,10 @@
 
 #include <stdio.h>
 
+#include <kdbmodule.h>
+
+typedef int (*testfunction_t) (int, int);
+
 int main (void)
 {
 	KeySet * myConfig = ksNew (0, KS_END);
@@ -38,5 +42,11 @@ int main (void)
 	// maybe you want kdbSet() myConfig here
 
 	kdbClose (handle, 0); // no more affairs with the key database.
+
+	KeySet * modules = ksNew (0, KS_END);
+	Key * errorKey = keyNew ("/", KEY_END);
+	testfunction_t testfunction = (testfunction_t) elektraModulesLoad (modules, "tester", "testfunction", errorKey);
+	printf ("TEST: %d\n", testfunction (42, 19));
+
 	return 0;
 }

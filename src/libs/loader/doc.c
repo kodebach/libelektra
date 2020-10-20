@@ -82,7 +82,7 @@ int elektraModulesInit (KeySet * modules, Key * error)
  * @return 0 on error
  * @ingroup modules
  */
-elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Key * error)
+fn_t elektraModulesLoad (KeySet * modules, const char * name, const char * symbol, Key * error)
 {
 	return 0;
 }

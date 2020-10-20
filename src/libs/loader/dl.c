@@ -40,7 +40,7 @@ struct _Module
 	void * handle;
 	union
 	{
-		elektraPluginFactory f;
+		fn_t f;
 		void * v;
 	} symbol;
 };
@@ -52,7 +52,7 @@ int elektraModulesInit (KeySet * modules, Key * error ELEKTRA_UNUSED)
 	return 0;
 }
 
-elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Key * errorKey)
+fn_t elektraModulesLoad (KeySet * modules, const char * name, const char * symbol, Key * errorKey)
 {
 #ifdef _WIN32
 	static const char elektraPluginPostfix[] = ".dll";
@@ -93,7 +93,7 @@ elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Ke
 		return 0;
 	}
 
-	module.symbol.v = dlsym (module.handle, "elektraPluginSymbol");
+	module.symbol.v = dlsym (module.handle, symbol);
 	if (module.symbol.v == NULL)
 	{
 		ELEKTRA_ADD_RESOURCE_WARNINGF (errorKey, "Dlsym failed. Could not get pointer to factory for module: %s. Reason: %s",

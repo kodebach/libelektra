@@ -273,7 +273,7 @@ Plugin * elektraPluginOpen (const char * name, KeySet * modules, KeySet * config
 		goto err_clup;
 	}
 
-	pluginFactory = elektraModulesLoad (modules, name, errorKey);
+	pluginFactory = (elektraPluginFactory) elektraModulesLoad (modules, name, "elektraPluginSymbol", errorKey);
 	if (pluginFactory == 0)
 	{
 		/* warning already set by elektraModulesLoad */

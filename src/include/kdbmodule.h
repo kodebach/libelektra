@@ -19,9 +19,10 @@ extern "C" {
 #endif
 
 typedef Plugin * (*elektraPluginFactory) (void);
+typedef void (*fn_t) (void);
 
 int elektraModulesInit (KeySet * modules, Key * error);
-elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Key * error);
+fn_t elektraModulesLoad (KeySet * modules, const char * name, const char * symbol, Key * error);
 int elektraModulesClose (KeySet * modules, Key * error);
 
 

@@ -62,7 +62,7 @@ static kdblib_symbol * elektraStaticSym (kdblib_symbol * handle, const char * sy
 	return NULL;
 }
 
-elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Key * error)
+fn_t elektraModulesLoad (KeySet * modules, const char * name, const char * symbol, Key * error)
 {
 	Key * moduleKey = keyNew ("system:/elektra/modules", KEY_END);
 	keyAddBaseName (moduleKey, name);
@@ -71,7 +71,7 @@ elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Ke
 	{
 		kdblib_symbol * module = (kdblib_symbol *) keyValue (lookup);
 		keyDel (moduleKey);
-		return (elektraPluginFactory) module->function;
+		return (fn_t) module->function;
 	}
 
 	kdblib_symbol * handle = elektraStaticLoad (name);
@@ -83,7 +83,7 @@ elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Ke
 		return 0;
 	}
 
-	kdblib_symbol * module = elektraStaticSym (handle, "elektraPluginSymbol");
+	kdblib_symbol * module = elektraStaticSym (handle, symbol);
 
 	if (module == NULL)
 	{
@@ -95,7 +95,7 @@ elektraPluginFactory elektraModulesLoad (KeySet * modules, const char * name, Ke
 	keySetBinary (moduleKey, module, sizeof (kdblib_symbol));
 	ksAppendKey (modules, moduleKey);
 
-	return (elektraPluginFactory) module->function;
+	return module->function;
 }
 
 int elektraModulesClose (KeySet * modules, Key * error ELEKTRA_UNUSED)

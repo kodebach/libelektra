@@ -63,5 +63,8 @@ function (elektra_export_plugin_symbols)
 					   "\t{\"elektraPluginSymbol\", &libelektra_${PLUGIN}_LTX_elektraPluginSymbol},\n")
 	endforeach ()
 
+	file (APPEND ${ARG_HEADER} "extern void libelektra_tester_LTX_testfunction (void);\n")
+	file (APPEND ${ARG_SOURCE} "\t{\"tester\", 0},\n" "\t{\"testfunction\", &libelektra_tester_LTX_testfunction},\n")
+
 	file (APPEND ${ARG_SOURCE} "\t{ 0 , 0 }\n" "};\n")
 endfunction (elektra_export_plugin_symbols)

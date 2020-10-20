@@ -15,7 +15,8 @@ set (
 	notification
 	highlevel
 	merge
-	opts)
+	opts
+	tester)
 
 # The subdirectory for LibElektra must be the last entry!
 list (APPEND SUBDIRS elektra)
