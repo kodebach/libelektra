@@ -59,8 +59,13 @@ jobs:
       run: cmake -E make_directory ${{runner.workspace}}/build
     
     - name: Choose Plugins
-      run: echo "::set-output name=plugins::ALL;-xerces;-curlget"
-
+      if: ${{ runner.os == 'macOS' }}
+      run: echo "PLUGINS=ALL;-xerces;-curlget" >> $GITHUB_ENV
+    
+    - name: Choose Plugins
+      if: ${{ runner.os == 'Linux' }}
+      run: echo "PLUGINS=ALL" >> $GITHUB_ENV
+      
     - name: Configure CMake
       shell: bash
       working-directory: ${{runner.workspace}}/build
