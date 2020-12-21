@@ -76,7 +76,7 @@ jobs:
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
         -DCC_COMPILER=${{ matrix.cc_compiler }}
         -DCXX_COMPILER=${{ matrix.cxx_compiler }}
-        -DPLUGINS=${{ plugins }}
+        -DPLUGINS=$PLUGINS
         -DBINDINGS=ALL
         -DTOOLS=ALL
         -DBUILD_FULL=${{ matrix.build_config == 'full' }}
