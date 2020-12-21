@@ -9,12 +9,16 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ macos-latest, ubuntu-latest ]
-        compiler: [ gcc, clang ]
         build_config: [ full, shared, static ]
         asan: [ true, false ]
-        compilers: [ '{ "gcc": { "cc": "gcc", "cxx": "g++" }, "clang": { "cc": "clang", "cxx": "clang++" } }' ]
+        include:
+          - cc_compiler: gcc
+            cxx_compiler: g++
+          - cc_compiler: clang
+            cxx_compiler: clang++
 
     steps:
     - uses: actions/checkout@v2
@@ -30,8 +34,8 @@ jobs:
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
       run: cmake $GITHUB_WORKSPACE -G ninja 
         -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-        -DCC_COMPILER=${{ fromJson(matrix.compilers)[matrix.compiler].cc }}
-        -DCXX_COMPILER=${{ fromJson(matrix.compilers)[matrix.compiler].cxx }}
+        -DCC_COMPILER=${{ matrix.cc_compiler }}
+        -DCXX_COMPILER=${{ matrix.cxx_compiler }}
         -DPLUGINS=ALL
         -DBINDINGS=ALL
         -DTOOLS=ALL
