@@ -347,6 +347,8 @@ struct _KDB
 	KeySet * global; /*!< This keyset can be used by plugins to pass data through
 			the KDB and communicate with other plugins. Plugins shall clean
 			up their parts of the global keyset, which they do not need any more.*/
+
+	KeySet * backends;
 };
 
 /**
@@ -393,6 +395,12 @@ struct _Plugin
 	KeySet * modules; /*!< A list of all currently loaded modules.*/
 };
 
+// FIXME: document
+struct _BackendData
+{
+	struct _Plugin * backend;
+	struct _KeySet * keys;
+};
 
 /**
  *
@@ -635,6 +643,8 @@ ElektraError * elektraErrorWrongType (const char * keyname, KDBType expectedType
 ElektraError * elektraErrorNullError (const char * function);
 ElektraError * elektraErrorEnsureFailed (const char * reason);
 ElektraError * elektraErrorMinimalValidationFailed (const char * function);
+
+int splitKsDivide (KeySet * backends, KeySet * ks);
 
 #ifdef __cplusplus
 }
