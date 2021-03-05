@@ -294,7 +294,7 @@ Plugin * backendOpenVersion (KeySet * global, KeySet * modules, Key * errorKey)
 	return backend;
 }
 
-
+#if 1 == 0
 /**
  * @brief Update internal size values of a backend
  *
@@ -341,3 +341,4 @@ int backendUpdateSize (Split * split, int index, Key * parent, int size)
 
 	return 0;
 }
+#endif
