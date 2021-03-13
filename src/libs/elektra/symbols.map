@@ -177,6 +177,8 @@ libelektraprivate_1.0 {
 	ksFindHierarchy;
 	keyReplacePrefix;
 
+	ksBelow;
+
 	# kdblogger.h
 	elektraLog;
 
