@@ -410,6 +410,7 @@ typedef struct _BackendData
 	struct _KeySet * keys;
 	struct _KeySet * plugins;
 	struct _KeySet * definition;
+	bool initialized;
 } BackendData;
 
 #if 1 == 0
@@ -515,7 +516,7 @@ int splitCacheLoadState (Split * split, KeySet * global);
 
 Key * backendsFindParent (KeySet * backends, const Key * key);
 KeySet * backendsForParentKey (KeySet * backends, Key * parentKey);
-int backendsDivide (KeySet * backends, KeySet * ks);
+bool backendsDivide (KeySet * backends, KeySet * ks);
 void backendsMerge (KeySet * backends, KeySet * ks);
 
 KeySet * elektraMountpointsParse (KeySet * elektraKs, KeySet * modules, Key * errorKey);
